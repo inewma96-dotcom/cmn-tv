@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Give | CMN Television",
-  description: "Partner with CMN Television to share hope around the world.",
+  title: "PNG Christian Media Network TV",
+  description: "Christian TV for Today's Generation in Papua New Guinea.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
