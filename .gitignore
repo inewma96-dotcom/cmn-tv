@@ -11,7 +11,6 @@
 # logs
 *.log
 tsconfig.tsbuildinfo
-public/videos/stationID.mp4
 
 # system files
 .DS_Store

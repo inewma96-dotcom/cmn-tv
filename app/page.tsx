@@ -450,7 +450,7 @@ export default function HomePage() {
           <div className="hero-media" aria-label="CMN TV station video">
             <div className="media-badge"><Radio size={15} /> Station ID</div>
             <video controls preload="metadata" playsInline poster="/image/logo.png">
-              <source src="/image/DZv9DE9ydrH(MP4).mp4" type="video/mp4" />
+              <source src="/videos/stationID.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
