@@ -18,6 +18,7 @@ import {
   Mail,
   MapPin,
   Menu,
+  MessageCircle,
   MonitorPlay,
   Phone,
   PlayCircle,
@@ -31,7 +32,6 @@ import {
   Video,
   WandSparkles,
   X,
-  Youtube,
   type LucideIcon,
 } from "lucide-react";
 import Image from "next/image";
@@ -57,7 +57,7 @@ const navItems: NavItem[] = [
   { href: "/progress", label: "Progress" },
   { href: "/support", label: "Support" },
   { href: "/contact", label: "Contact" },
-  { href: "/coffee", label: "Coffee" },
+  { href: "/livestream", label: "Livestream" },
 ];
 
 const stats = [
@@ -271,39 +271,42 @@ const services: IconCard[] = [
   { title: "Television Production", copy: "Program planning, studio production, broadcast-ready editing, and delivery.", icon: Tv },
   { title: "Graphic Design", copy: "Visual design support for ministries, campaigns, events, and media promotions.", icon: WandSparkles },
   { title: "Event Coverage", copy: "Coverage for crusades, church programs, conferences, launches, and outreach.", icon: Camera },
-  { title: "Commercial Advertising", copy: "Awareness and promotional media for responsible business and community needs.", icon: BriefcaseBusiness },
+  {
+    title: "Special Moments",
+    copy: "Thoughtful video coverage for weddings, funeral services, memorial gatherings, and gospel song video shoots.",
+    icon: HeartHandshake,
+  },
   { title: "Product & Ministry Promotions", copy: "Brand, product, church, and ministry promotion across Christian media formats.", icon: Sparkles },
   { title: "DVD / Digital Media Production", copy: "Digital media packages, program archives, and distribution-ready content.", icon: Clapperboard },
   { title: "Documentary Production", copy: "Story-driven films for ministry, community development, and testimony projects.", icon: Film },
 ];
 
-const progressItems: IconCard[] = [
-  {
-    title: "Equipment & Studio",
-    copy: "CMN TV has used professional video cameras, editing workstations, lighting equipment, and modern production tools to support Christian television production.",
-    icon: MonitorPlay,
-  },
-  {
-    title: "Production Tools",
-    copy: "Production work includes Adobe Premiere Pro CC, video editing, visual effects, 3D modelling, rendering, and media post-production.",
-    icon: Lightbulb,
-  },
-  {
-    title: "Team",
-    copy: "CMN TV is supported by producers, video editors, camera operators, script writers, and content developers working together.",
-    icon: Users,
-  },
-];
-
 const portfolio = [
-  "National Repentance Day",
-  "Jubilee Celebration Crusades",
-  "Prison Ministry",
-  "PNG Bible Church Boroko",
-  "Children's Ministry",
-  "Church events",
-  "Community outreach",
-  "Documentaries and inspirational films",
+  {
+    title: "National Repentance Day",
+    copy: "Worship, prayer, and national reflection captured for families, churches, and future broadcast.",
+    image: "/image/programs/CHURCH EVENTS.PNG",
+  },
+  {
+    title: "Jubilee Celebration Crusades",
+    copy: "Large ministry gatherings filmed with the atmosphere, preaching, testimonies, and worship moments intact.",
+    image: "/image/programs/GOSPEL PRAISE.PNG",
+  },
+  {
+    title: "Hope Behind Bars",
+    copy: "Prison ministry stories that highlight hope, restoration, and lives being changed through Christ.",
+    image: "/image/programs/HOPE BEHIND BARS.PNG",
+  },
+  {
+    title: "Youth Life",
+    copy: "Youth-focused stories, events, and creative programs produced to encourage the next generation.",
+    image: "/image/programs/YOUTH LIFE.PNG",
+  },
+  {
+    title: "Church Events",
+    copy: "Special church programs and community gatherings filmed with care for online sharing and broadcast.",
+    image: "/image/programs/PREACHINGS.PNG",
+  },
 ];
 
 const supportOptions: IconCard[] = [
@@ -345,13 +348,23 @@ export function SiteHeader({ activePath = "/" }: { activePath?: string }) {
         <Brand />
         <nav className={menuOpen ? "nav-links open" : "nav-links"} aria-label="Main navigation">
           {navItems.map((item) => (
-            <a className={activePath === item.href ? "active" : ""} href={item.href} key={item.href}>
+            <a
+              className={`${activePath === item.href ? "active " : ""}${item.href === "/livestream" ? "livestream-nav-link" : ""}`.trim()}
+              href={item.href}
+              key={item.href}
+            >
+              {item.href === "/livestream" ? (
+                <span className="live-nav-icon" aria-hidden="true">
+                  <Radio />
+                  <span className="live-wave"><i /><i /><i /></span>
+                </span>
+              ) : null}
               {item.label}
             </a>
           ))}
         </nav>
-        <a className="nav-cta" href="/coffee">
-          Buy a Coffee <HeartHandshake size={17} />
+        <a className="nav-cta" href="/donate">
+          Donate <HeartHandshake size={17} />
         </a>
         <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" type="button">
           {menuOpen ? <X /> : <Menu />}
@@ -370,7 +383,6 @@ export function SiteFooter() {
           <p>Impacting Today's Generation with Godly Principles Through Christian Television.</p>
           <div className="socials">
             <a href="https://www.facebook.com/pngcmn" aria-label="Facebook" target="_blank" rel="noreferrer"><Facebook /></a>
-            <a href="/" aria-label="YouTube"><Youtube /></a>
             <a href="mailto:pngchristiantv@gmail.com" aria-label="Email"><Mail /></a>
           </div>
         </div>
@@ -454,9 +466,12 @@ export function AboutContent() {
             informs, entertains, and transforms lives through the Word of God.
           </p>
           <p>
-            Historical materials also referenced the ministry as PNG CMNTV and PNG Kristen TV. It was previously promoted
-            as PNG's first Christian TV, broadcast or promoted through NBC Channel 7, and also referenced as running on
-            NBC Play Box Channel 6.
+            Historical materials also{" "}
+            <span className="cmn-reference-highlight">
+              referenced the ministry as PNG CMNTV and PNG Kristen TV
+            </span>
+            . It was previously promoted as PNG's first Christian TV, broadcast or promoted through NBC Channel 7, and
+            also referenced as running on NBC Play Box Channel 6.
           </p>
           <div className="history-panel">
             <BadgeCheck />
@@ -582,11 +597,32 @@ export function ServicesContent() {
         </div>
         <div className="rate-note">
           <CalendarClock />
-          <p>
-            CMN TV has historically supported television commercials, event promotions, product branding, ministry
-            promotions, and community awareness campaigns. Current rates and quotations should be requested directly
-            through the contact section.
-          </p>
+          <div className="rate-note-content">
+            <p>
+              CMN TV has historically supported television commercials, event promotions, product branding, ministry
+              promotions, and community awareness campaigns. Current rates and quotations should be requested directly
+              through the contact section.
+            </p>
+            <div className="rate-contact-actions" aria-label="Service enquiry contact options">
+              <a
+                href="mailto:pngchristiantv@gmail.com?subject=CMN%20TV%20service%20enquiry"
+                aria-label="Email CMN TV"
+              >
+                <Mail />
+              </a>
+              <a
+                href="https://wa.me/67574604474?text=Hello%20CMN%20TV%2C%20I%20would%20like%20to%20ask%20about%20your%20service%20rates%20and%20quotations."
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Message CMN TV on WhatsApp"
+              >
+                <MessageCircle />
+              </a>
+              <a href="tel:+67574604474" aria-label="Call CMN TV">
+                <Phone />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -596,30 +632,21 @@ export function ServicesContent() {
 export function ProgressContent() {
   return (
     <section className="section progress-section">
-      <div className="container progress-grid">
-        <div>
-          <SectionHeading kicker="Our Progress" title="Built by committed people, production tools, and ministry partnerships." align="left" />
-          <div className="progress-list">
-            {progressItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <article key={item.title}>
-                  <Icon />
-                  <div>
-                    <h3>{item.title}</h3>
-                    <p>{item.copy}</p>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
+      <div className="container progress-portfolio-only">
         <div className="portfolio-card">
           <span className="gold-label">Production portfolio</span>
-          <h3>Stories, events, and community work covered by CMN TV.</h3>
-          <div className="portfolio-list">
+          <h3>A portfolio of the work we have been doing.</h3>
+          <div className="portfolio-grid">
             {portfolio.map((item) => (
-              <span key={item}><CheckCircle2 /> {item}</span>
+              <article className="portfolio-work-card" key={item.title}>
+                <div className="portfolio-thumb">
+                  <Image src={item.image} alt="" fill sizes="(max-width: 1080px) 50vw, 260px" />
+                </div>
+                <div>
+                  <h4>{item.title}</h4>
+                  <p>{item.copy}</p>
+                </div>
+              </article>
             ))}
           </div>
         </div>
@@ -665,7 +692,7 @@ export function SupportContent() {
 
 export function ContactContent() {
   return (
-    <section className="section contact-section">
+    <section className="section contact-section" id="contact">
       <div className="container contact-grid">
         <div>
           <SectionHeading kicker="Contact Us" title="Reach the CMN TV team in Boroko, NCD." align="left" />
@@ -691,4 +718,3 @@ export function ContactContent() {
     </section>
   );
 }
-
