@@ -69,7 +69,7 @@ const stats = [
   { label: "Established", value: "2014" },
   { label: "Location", value: "Port Moresby, PNG" },
   { label: "Ownership", value: "100% Nationally Owned" },
-  { label: "Focus", value: "Christian TV & Multimedia" },
+  { label: "Focus", value: "Christian TV and Multimedia" },
 ];
 
 const principles: IconCard[] = [
@@ -465,7 +465,13 @@ export default function HomePage() {
               </video>
             </div>
             <a className="livestream-home-link" href="/livestream">
-              <span><Radio size={19} /> Watch CMN TV online</span>
+              <span>
+                <span className="live-nav-icon" aria-hidden="true">
+                  <Radio />
+                  <span className="live-wave"><i /><i /><i /></span>
+                </span>
+                Watch CMN TV online
+              </span>
               <ArrowRight size={19} />
             </a>
           </div>
@@ -475,7 +481,7 @@ export default function HomePage() {
       <section className="section about-section" id="about">
         <div className="container about-grid">
           <div>
-            <SectionHeading kicker="About CMN TV" title="A Christian broadcasting and multimedia ministry based in Port Moresby." align="left" />
+            <SectionHeading kicker="About CMN TV" title="A Christian broadcasting and multimedia ministry based in Port Moresby" align="left" />
             <p className="lead-copy">
               PNG Christian Media Network Television was established in 2014 in Port Moresby, Papua New Guinea. It was
               created to meet the growing demand for Christian television and to provide faith-based content that
@@ -487,7 +493,7 @@ export default function HomePage() {
                 referenced the ministry as PNG CMNTV and PNG Kristen TV
               </span>
               . It was previously promoted as PNG's first Christian TV, broadcast or promoted through NBC Channel 7, and
-              also referenced as running on NBC Play Box Channel 6.
+              also referenced as running on NBC Play Box Channel 7.
             </p>
             <div className="history-panel">
               <BadgeCheck />
@@ -716,12 +722,14 @@ export default function HomePage() {
         <div className="container footer-grid">
           <div>
             <Brand light />
-            <p>
-              Impacting Today's Generation with Godly Principles Through Christian Television.
-            </p>
-            <div className="socials">
-              <a href="https://www.facebook.com/pngcmn" aria-label="Facebook" target="_blank" rel="noreferrer"><Facebook /></a>
-              <a href="mailto:pngchristiantv@gmail.com" aria-label="Email"><Mail /></a>
+            <div className="footer-social-panel">
+              <p>
+                Impacting Today's Generation with Godly Principles Through Christian Television.
+              </p>
+              <div className="socials">
+                <a href="https://www.facebook.com/pngcmn" aria-label="Facebook" target="_blank" rel="noreferrer"><Facebook /></a>
+                <a href="mailto:pngchristiantv@gmail.com" aria-label="Email"><Mail /></a>
+              </div>
             </div>
           </div>
           <div>
