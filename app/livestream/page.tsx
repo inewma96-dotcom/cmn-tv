@@ -1,7 +1,34 @@
-import { ArrowRight, HeartHandshake, Radio, Satellite } from "lucide-react";
+import { Radio } from "lucide-react";
 import { SiteFooter, SiteHeader } from "../site-pages";
+import { LivestreamPlayer } from "./livestream-player";
 
-const livestreamEmbedUrl = process.env.NEXT_PUBLIC_CMN_LIVESTREAM_EMBED_URL;
+const youtubeChannelId = "UC6_3owrj4wsO4dJGp2B7Xrg";
+const defaultLivestreamEmbedUrl = `https://www.youtube.com/embed/live_stream?channel=${youtubeChannelId}&autoplay=1&mute=1&playsinline=1&rel=0`;
+const livestreamEmbedUrl = defaultLivestreamEmbedUrl;
+const youtubeLiveUrl = `https://www.youtube.com/channel/${youtubeChannelId}/live`;
+
+const livestreamVideos = [
+  {
+    title: "PNG Outreach Team conducting an outreach at Boroko 4 Mile.",
+    videoId: "Lj24YSWbX4w",
+    href: "https://youtu.be/Lj24YSWbX4w?si=cxuAD8y0nMi89nnr",
+  },
+  {
+    title: "Rev. Robert Merrill Brock Memorial Tabernacle Opening",
+    videoId: "fjscUDwqEMs",
+    href: "https://youtu.be/fjscUDwqEMs?si=oVTf0xiusENiCPci",
+  },
+  {
+    title: "Tambul Lower Kagul Western Highlands",
+    videoId: "kzTwix_HGTk",
+    href: "https://youtu.be/kzTwix_HGTk?si=AlVUMy13AIxOBBRj",
+  },
+  {
+    title: "Nebilyer Valley Western Highlands Province",
+    videoId: "Xcg_ft5oi14",
+    href: "https://youtu.be/Xcg_ft5oi14?si=rHz1r0yHUTbud19_",
+  },
+];
 
 export default function LivestreamPage() {
   return (
@@ -17,37 +44,30 @@ export default function LivestreamPage() {
             </span>
           </h1>
 
-          <div className="livestream-player">
-            {livestreamEmbedUrl ? (
-              <iframe
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                referrerPolicy="strict-origin-when-cross-origin"
-                src={livestreamEmbedUrl}
-                title="CMN TV livestream"
-              />
-            ) : (
-              <div className="livestream-unavailable">
-                <Satellite aria-hidden="true" />
-                <h2>Livestream connection is being prepared</h2>
-              </div>
-            )}
-          </div>
+          <LivestreamPlayer embedUrl={livestreamEmbedUrl} youtubeLiveUrl={youtubeLiveUrl} />
 
-          <div className="livestream-donate">
-            <HeartHandshake aria-hidden="true" />
-            <div>
-              <h2>Help keep CMN TV broadcasting every day.</h2>
-              <p>
-                Your donation supports the ministry&apos;s day-to-day operations, including program
-                production, internet and broadcast costs, equipment maintenance, transport, studio
-                needs, and the team working to share Christian content across Papua New Guinea.
-              </p>
+          <section className="livestream-archive" aria-labelledby="livestream-archive-title">
+            <div className="livestream-archive-heading">
+              <span>Recent Broadcasts</span>
+              <h2 id="livestream-archive-title">LiveStream</h2>
             </div>
-            <a className="primary-button" href="/donate">
-              Donate now <ArrowRight size={18} />
-            </a>
-          </div>
+
+            <div className="livestream-video-grid">
+              {livestreamVideos.map((video) => (
+                <a className="livestream-video-card" href={video.href} target="_blank" rel="noreferrer" key={video.videoId}>
+                  <span className="livestream-video-thumb">
+                    <img src={`https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`} alt="" />
+                    <span className="livestream-video-play" aria-hidden="true">Play</span>
+                  </span>
+                  <span className="livestream-video-meta">
+                    <small>CMN TV</small>
+                    <strong>{video.title}</strong>
+                  </span>
+                </a>
+              ))}
+            </div>
+          </section>
+
         </div>
       </section>
       <SiteFooter />

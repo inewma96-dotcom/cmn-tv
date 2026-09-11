@@ -5,17 +5,33 @@ The website livestream page is available at `/livestream`.
 ## YouTube Live
 
 1. Enable livestreaming on the official CMN TV YouTube channel.
-2. Copy the channel ID from YouTube Studio.
-3. Create `.env.local` in the project root:
+2. Start the livestream from YouTube Studio using the CMN TV channel.
+3. Make sure the live video is public and embedding is allowed.
+4. The livestream page currently uses the CMN TV channel-live embed by default:
 
 ```env
-NEXT_PUBLIC_CMN_LIVESTREAM_EMBED_URL=https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID
-NEXT_PUBLIC_CMN_CHANNEL_URL=https://www.youtube.com/channel/YOUR_CHANNEL_ID
+https://www.youtube.com/embed/live_stream?channel=UC6_3owrj4wsO4dJGp2B7Xrg
 ```
 
-4. Restart the Next.js server.
+5. To replace it later, update the `youtubeChannelId` value in `app/livestream/page.tsx`.
 
-The same embed URL continues to work for future broadcasts made live on that channel.
+If you prefer to manage the URL from Vercel later, add this environment variable and update the
+livestream page to read it:
+
+```env
+NEXT_PUBLIC_CMN_LIVESTREAM_EMBED_URL=https://www.youtube.com/embed/YOUR_LIVE_VIDEO_ID
+```
+
+6. Restart the Next.js server or redeploy the site.
+
+If a specific YouTube event must be embedded instead, use this format:
+
+```env
+NEXT_PUBLIC_CMN_LIVESTREAM_EMBED_URL=https://www.youtube.com/embed/YOUR_LIVE_VIDEO_ID
+```
+
+The channel-live embed is best when the website should follow whatever the CMN TV channel is
+currently broadcasting live.
 
 ## Broadcast Workflow
 

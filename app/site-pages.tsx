@@ -20,6 +20,7 @@ import {
   Menu,
   MessageCircle,
   MonitorPlay,
+  Music2,
   Phone,
   PlayCircle,
   Radio,
@@ -31,6 +32,7 @@ import {
   Users,
   Video,
   WandSparkles,
+  Youtube,
   X,
   type LucideIcon,
 } from "lucide-react";
@@ -87,7 +89,7 @@ const principles: IconCard[] = [
 
 const programs = [
   { title: "Gospel Praise", image: "/image/programs/GOSPEL PRAISE.PNG" },
-  { title: "Light Moments Devotion", image: "/image/programs/MORNING LIGHT DEVOTIONS.PNG" },
+  { title: "Morning Show", image: "/image/programs/MORNING LIGHT DEVOTIONS.PNG" },
   { title: "Morning Praise & Worship", image: "/image/programs/MORNING GOSPEL PRAISE.PNG" },
   { title: "Preachings", image: "/image/programs/PREACHINGS.PNG" },
   { title: "Testimonies", image: "/image/programs/TESTIMONIES.PNG" },
@@ -100,6 +102,37 @@ const programs = [
   { title: "Documentaries" },
   { title: "Gospel Music" },
   { title: "Christian News" },
+];
+
+const contentTypes = [
+  {
+    label: "Local Content",
+    title: "PNG-produced programs",
+    copy: "Faith-based programs, testimonies, church services, youth features, and community stories produced for local viewers.",
+    programs: [
+      "Gospel Praise",
+      "Morning Show",
+      "Morning Praise & Worship",
+      "Preachings",
+      "Testimonies",
+      "Youth Life",
+      "Church Events",
+      "Christian News",
+    ],
+  },
+  {
+    label: "International Content",
+    title: "Global Christian programs",
+    copy: "Selected Christian teaching, ministry features, documentaries, inspirational stories, and family-safe programs from overseas partners.",
+    programs: [
+      "Inspirational Stories",
+      "Hope Behind Bars",
+      "Children's Programs",
+      "Documentaries",
+      "Christian Movies",
+      "Gospel Music",
+    ],
+  },
 ];
 
 const dailySchedule = [
@@ -327,6 +360,10 @@ const contacts = [
   { title: "Partner With Us", detail: "Bank details available upon request.", secondary: "Reach out for current partnership options.", icon: HeartHandshake, href: "mailto:pngchristiantv@gmail.com" },
 ];
 
+const mapQuery = "Lahara Avenue, Boroko, National Capital District, Papua New Guinea";
+const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
+const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(mapQuery)}`;
+
 export function Brand({ light = false }: { light?: boolean }) {
   return (
     <a className={`brand ${light ? "brand-light" : ""}`} href="/" aria-label="PNG Christian Media Network TV home">
@@ -363,9 +400,6 @@ export function SiteHeader({ activePath = "/" }: { activePath?: string }) {
             </a>
           ))}
         </nav>
-        <a className="nav-cta" href="/donate">
-          Donate <HeartHandshake size={17} />
-        </a>
         <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" type="button">
           {menuOpen ? <X /> : <Menu />}
         </button>
@@ -383,7 +417,9 @@ export function SiteFooter() {
           <div className="footer-social-panel">
             <p>Impacting Today's Generation with Godly Principles Through Christian Television.</p>
             <div className="socials">
-              <a href="https://www.facebook.com/pngcmn" aria-label="Facebook" target="_blank" rel="noreferrer"><Facebook /></a>
+              <a href="https://www.facebook.com/pngcmn/" aria-label="Facebook" target="_blank" rel="noreferrer"><Facebook /></a>
+              <a href="https://www.tiktok.com/@png.cmntv" aria-label="TikTok" target="_blank" rel="noreferrer"><Music2 /></a>
+              <a href="http://www.youtube.com/@pngChristiantv-d3y" aria-label="YouTube" target="_blank" rel="noreferrer"><Youtube /></a>
               <a href="mailto:pngchristiantv@gmail.com" aria-label="Email"><Mail /></a>
             </div>
           </div>
@@ -531,6 +567,9 @@ export function ProgramsContent() {
         <div className="program-grid">
           {programs.map((program) => (
             <article className="program-card" key={program.title}>
+              <span className="program-sponsor-badge" tabIndex={0} data-tooltip="Available for Sponsorship">
+                Available for Sponsorship
+              </span>
               {program.image ? (
                 <Image src={program.image} alt="" fill sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 25vw" />
               ) : (
@@ -542,6 +581,29 @@ export function ProgramsContent() {
               </div>
             </article>
           ))}
+        </div>
+        <div className="content-types-section">
+          <div className="content-types-intro">
+            <span className="gold-label">Content Mix</span>
+            <h3>Local and international Christian programming</h3>
+            <p>
+              CMN TV combines Papua New Guinea ministry content with selected international Christian programs for daily broadcast.
+            </p>
+          </div>
+          <div className="content-types-grid">
+            {contentTypes.map((type) => (
+              <article className="content-type-card" key={type.label}>
+                <span>{type.label}</span>
+                <h4>{type.title}</h4>
+                <p>{type.copy}</p>
+                <ul>
+                  {type.programs.map((program) => (
+                    <li key={program}>{program}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
         </div>
         <div className="schedule-panel">
           <div className="schedule-art">
@@ -702,6 +764,24 @@ export function ContactContent() {
             Connect with PNG Christian Media Network TV for programming, production services, church partnerships, media
             coverage, advertising, prayer support, or ministry sponsorship.
           </p>
+          <div className="contact-map-panel">
+            <iframe
+              title="Map to PNG Christian Media Network TV in Boroko"
+              src={mapEmbedUrl}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+            <div className="contact-map-bar">
+              <div>
+                <span>Find us</span>
+                <b>Lahara Avenue, Boroko</b>
+              </div>
+              <a href={directionsUrl} target="_blank" rel="noreferrer">
+                Get Directions
+              </a>
+            </div>
+          </div>
         </div>
         <div className="contact-cards">
           {contacts.map((contact) => {
