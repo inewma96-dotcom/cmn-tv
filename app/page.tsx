@@ -462,10 +462,13 @@ export default function HomePage() {
           <div className="hero-media-stack">
             <div className="hero-media" aria-label="CMN TV station video">
               <div className="media-badge"><Radio size={15} /> Station ID</div>
-              <video controls preload="metadata" playsInline poster="/image/logo.png">
-                <source src="/videos/stationID.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+              <iframe
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                referrerPolicy="strict-origin-when-cross-origin"
+                src="https://www.youtube.com/embed/QQGXIKgBjk8?rel=0"
+                title="CMN TV Station ID"
+              />
             </div>
             <a className="livestream-home-link" href="/livestream">
               <span>

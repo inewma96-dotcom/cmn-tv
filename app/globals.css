@@ -446,10 +446,12 @@ main > footer {
   min-width: 0;
 }
 
-.hero-media video {
+.hero-media video,
+.hero-media iframe {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 10;
+  border: 0;
   object-fit: cover;
   background: #061526;
 }
@@ -3140,7 +3142,8 @@ main > footer {
     width: 100%;
   }
 
-  .hero-media video {
+  .hero-media video,
+  .hero-media iframe {
     aspect-ratio: 16 / 11;
   }
 
