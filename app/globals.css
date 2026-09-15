@@ -2999,6 +2999,7 @@ main > footer {
 
   .menu-button {
     display: grid;
+    margin-left: auto;
   }
 
   .nav {
